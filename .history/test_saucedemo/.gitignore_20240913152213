@@ -1,7 +1,0 @@
-.git/*
-env/
-venv/
-.venv
-.venv/
-.history
-.history/
