@@ -17,7 +17,7 @@ git clone https://git@github.com:DoraLoginova/test_tasks.git
 
 ```
 python3 -m venv venv
-source venv/bin/activate  # On Windows, use venv\Scripts\activate
+source venv/bin/activate  
 
 ```
  
