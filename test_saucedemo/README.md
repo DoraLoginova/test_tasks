@@ -1,6 +1,6 @@
 # E2E тестирование для saucedemo.com
 
-## Предварительные условия
+
 - Python 3.X
 - Google Chrome браузер
 
