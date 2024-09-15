@@ -9,19 +9,29 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO_NAME = os.getenv("REPO_NAME")
 
 
-def test_github_api():
-    # Создание нового репозитория
-    create_repo_response = requests.post(
-        f"https://api.github.com/user/repos",
+def create_new_repo():
+    requests.post(
+        "https://api.github.com/user/repos",
+        headers={"Authorization": f"token {GITHUB_TOKEN}", },
+        json={"name": REPO_NAME, }
+    )
+    print(f"Репозиторий '{REPO_NAME}' успешно создан.")
+
+    list_repos = requests.get(
+        f"https://api.github.com/users/{GITHUB_USERNAME}/repos",
         headers={
-            "Authorization": f"token {GITHUB_TOKEN}",
-            "Content-Type": "application/json"
-        },
-        json={
-            "name": REPO_NAME,
-            "private": False
+            "Authorization": f"token {GITHUB_TOKEN}"
         }
     )
+    assert any(repo["name"] == REPO_NAME for repo in list_repos.json())
+    print(f"Репозиторий '{REPO_NAME}' найден.")
+
+    requests.delete(
+        f"https://api.github.com/repos/{GITHUB_USERNAME}/{REPO_NAME}",
+        headers={"Authorization": f"token {GITHUB_TOKEN}"}
+    )
+    print(f"Репозиторий '{REPO_NAME}' успешно удален.")
+
 
 if __name__ == "__main__":
-    test_github_api()
+    create_new_repo()
