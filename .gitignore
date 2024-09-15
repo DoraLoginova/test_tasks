@@ -7,3 +7,6 @@ venv/
 .history/
 history/
 history
+.env
+.env/
+env
